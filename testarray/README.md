@@ -1,1 +1,2 @@
-test programs for practice
+test array and object iteration
+javscript node programs not react
