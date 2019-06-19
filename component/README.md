@@ -5,3 +5,14 @@ the process for making these projects is:
 4) delete README.md and replace w/own explanation
 5) run and test using npm start
 
+
+Is it better to use: 
+function foo(){
+  return xxx;
+}
+
+or
+
+const foo = ()=>{
+  return xxx;
+}
