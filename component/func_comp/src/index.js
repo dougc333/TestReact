@@ -1,25 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 
-
-function Welcome(){
-  return(
-  <div>
-    <h6>each functional component can only return 1 element</h6>
-  </div>)
-}
-
-function FirstComp(){
- return(
-   <div>
-     and the first letter of the component must be capitalized
-   </div>
- ) 
-}
-
-
-
-ReactDOM.render(
-     <Welcome />,
-  document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();
 
