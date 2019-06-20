@@ -16,3 +16,11 @@ or
 const foo = ()=>{
   return xxx;
 }
+
+
+Outline: components = reusability and partitioning of code. Components which change can be updated saving
+resources for larger scale. Components which dont have state dont change and shouldnt requrire server/client 
+resources. This refacctoring into functional/state components can increase performance but the penalty is the laoding of 
+the react runtime. 
+
+
