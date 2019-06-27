@@ -1,3 +1,43 @@
+Buttons are the simplest combination of react programming where state is held inside
+a react component and that state as it changes is propagated to the DOM. 
+
+1) define a ctor and implement super(props) it it. This is necessary if you have state and 
+if you want to bind methods. If none of these are true then dont create a ctor less component use a functional component instead.  How to manage component state? Use setState to change state outside of ctor
+ and put init state into ctor using this.state=something; Never copy props because if it updates the change wont be propagated. The ctor is only called on component creation. 
+2) bind class methods to this in the ctor and assign it a name. This allows the class to call it and preserves the state of this to what it was during component creation. 
+3) event handlers in react convention. 
+
+
+
+STATE:
+class A extends Component{
+  //can you put state outside ctor? 
+  //do you need a this? 
+  //this.num_clicks=0; no cause this not defined outside ctor
+  //num_c = 0; no, not bound to this
+  constructor(props){
+    this.some_state = 0
+    this.handleClick = this.handleClick.bind(this);
+  }
+  
+  handleClick(e){
+    this.setState((x)=>({
+      console.log(e);
+      this.some_state++;
+    }));
+  }
+
+  render(){
+    return(){
+      <div onClick={this.handleClick}>{this.some_state}</div>
+    }
+  }
+}
+
+
+BIND:
+
+EVANTS:
 events are named using camelCase. Events are named w/camelCase. 
 
 <button onClick="doSomething()">

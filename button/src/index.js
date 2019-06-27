@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 
 class App extends Component {
   num_click = 0;
-  constructor(props) {
-    super(props);
+  constructor() {
+    //super(props);
     this.state = { isToggleOn: true };
 
     this.handleClick = this.handleClick.bind(this);
