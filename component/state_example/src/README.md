@@ -1,3 +1,7 @@
+The solution partitions into 3 components instead of doing everythign in index.js or one class
+does this match react-ui? No the button is a hard coded css class
+
+
 ### Instructions
 
 You're given a starter template with dummy data.
