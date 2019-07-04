@@ -55,7 +55,7 @@ React applications.
 
 2.  Does it remain unchanged over time? If so, it probably isn’t state.
 
-3.  Can you compute it based on any other state or props in your component?
+3.  Can you compute it based on any othenr state or props in your component?
     If so, it isn’t state.
 
 #### Step 4. Identify where each piece of state lives.

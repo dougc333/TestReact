@@ -1,3 +1,7 @@
+Debatable whether or not this separation makes sense. Looking for a database interface instead
+or interface to redis dist memory store. 
+
+
 ### Instructions
 
 This file gives you a functioning app. But, as you can tell, the App

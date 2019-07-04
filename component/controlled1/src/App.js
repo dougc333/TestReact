@@ -1,20 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { text_data: "" };
+  }
+
+  handleChange = e => {
+    this.setState({ text_data: e.target.value });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">ReactND - Coding Practice</h1>
-        </header>
-        <div className="container">
-          <input type="text" placeholder="Say Something" />
-          <p className="echo">Echo:</p>
-          <p>This should mirror the text you typed into the input field.</p>
-        </div>
+      <div>
+        <input
+          type="text"
+          value={this.state.text_data}
+          onChange={this.handleChange}
+        />
+        <p className="echo">Echo:{this.state.text_data}</p>
+        <p>This should mirror the text you typed into the input field.</p>
       </div>
     );
   }
