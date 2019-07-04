@@ -1,6 +1,9 @@
 Debatable whether or not this separation makes sense. Looking for a database interface instead
 or interface to redis dist memory store. 
 
+Key: learn how to add variables to global props. This may not be the best design choice for many situations
+how to add additional functions to component, add/remove
+
 
 ### Instructions
 

@@ -1,5 +1,6 @@
-DEMO controlled component using state in component. 
-
+DEMO controlled component using state in component, forms are CC. 
+how to use onChange, how to update state in component from UI change
+add: is there onXXX which should be same as onChange? 
 
 Controlled Components: 
 a component where the component controls the state of a user input. A common use is an input box
