@@ -1,3 +1,16 @@
+
+Outline:
+1) simple_state: how to define state in this.state in ctor when extending Component. 
+1) state_example: how to use onChange to change global state in 1 component
+1) state_example_refactored: XXX not completed. how to decompose props and global state to individual components
+1) proptypes: how to use proptypes to validate type and default value
+1) how to use props and global state: project temp/ how to equate state in one component to props in another component. state liftup in react docs
+2) controlled1: echo using onChange and input
+3) controlled2: not done
+4) ex1: not done
+5) ex2: not done
+
+
 the process for making these projects is:
 1) npx create-react-app name_of_project
 2) go into src/ and delete everything except index.js. this is debatable as index.css performs css reset
