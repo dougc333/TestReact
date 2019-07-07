@@ -1,3 +1,6 @@
+This uses 2 concepts, 1) additem form from form_additem which is a modification of the basic form adding disable for empty inputs and 2) listitem which is both item and list components
+
+
 Debatable whether or not this separation makes sense. Looking for a database interface instead
 or interface to redis dist memory store. 
 
