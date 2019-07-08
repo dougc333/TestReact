@@ -11,10 +11,12 @@ class Another extends Component {
 
   updateOnChange = () => {
     console.log("updateOnChange");
+
   };
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault(); 
     console.log("handleSubmit");
+    
   };
   render() {
     return (
