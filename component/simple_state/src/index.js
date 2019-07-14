@@ -1,18 +1,31 @@
-import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
-
-
-//new way is to embed state directly into object like ivar. 
-class App extends Component{
+//embed state directly into object like ivar.
+//modify state using setState which takes a callback
+//state change on serverState, props change, eventhandler
+class App extends Component {
   state = {
-   username:"asdfasdf"
+    username: "asdfasdf"
+  };
+  //the solution didnt bind the function in the ctor. maybe only for functional components?
+  handleChange() {
+    console.log("handlechange:", this.state.username);
   }
-  render(){
-    return (<div>{this.state.username}</div>)
+  render() {
+    return (
+      <div>
+        {this.state.username}
+        <input
+          id="inputbox"
+          type="text"
+          placeholder="put stuff here"
+          ref={x => (this.state.username = x)}
+        />
+        <button onClick={this.handleChange}>Presss here</button>
+      </div>
+    );
   }
-
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
+ReactDOM.render(<App />, document.getElementById("root"));
