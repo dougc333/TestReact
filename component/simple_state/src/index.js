@@ -6,12 +6,17 @@ import ReactDOM from "react-dom";
 //state change on serverState, props change, eventhandler
 class App extends Component {
   state = {
-    username: "asdfasdf"
+    username: "test username"
   };
-  //the solution didnt bind the function in the ctor. maybe only for functional components?
-  handleChange() {
-    console.log("handlechange:", this.state.username);
-  }
+  //the solution didnt bind the function in the ctor but if you use function_name=e=>{} there
+  //is a bind done for you!! how to verify this? in the debugger
+  //arrow functions bind this w/the function in ES6
+  handleChange = e => {
+    console.log("inputbox:", document.getElementById("inputbox").value);
+    console.log("handlechange e:", e);
+    this.setState({ username: document.getElementById("inputbox").value });
+    console.log("after setstate:", this.state.username);
+  };
   render() {
     return (
       <div>
@@ -20,7 +25,7 @@ class App extends Component {
           id="inputbox"
           type="text"
           placeholder="put stuff here"
-          ref={x => (this.state.username = x)}
+          //value={this.state.username}
         />
         <button onClick={this.handleChange}>Presss here</button>
       </div>
