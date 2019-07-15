@@ -1,10 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-//old
-function App() {
-  return <div>App</div>;
-}
 
 //ES6 newer
 const App1 = props => {

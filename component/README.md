@@ -1,8 +1,12 @@
 
 Outline:
-1) simple_state: how to define state in this.state in ctor when extending Component. 
-1) state_example: how to use onChange to change global state in 1 component
-1) state_example_refactored: XXX not completed. how to decompose props and global state to individual components
+1) simple_state:
+   - how to bind a function to a component w/o using bind keyword. use arrow function ES6 only and above
+   - how to use input box to update state
+   = how to use setState and JSON syntax to update state variable in onChange event handler triggered off button click
+1) simple_state_form:
+   - use form keyword
+1) state_example: udacity App/Game/Score component refactor
 1) button: onClick handler
 1) contactlist: how to display state w/JSX 
 1) favorite_movies: how to map/filter between different objects

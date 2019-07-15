@@ -1,3 +1,5 @@
+test lambda fuctions for favorite movie. make hashtable
+
 To run: npm start, then localhost:3000
 
 Use React and the `profiles`, `users`, and `movies` data in `App.js` to display a list of users alongside their favorite movies.

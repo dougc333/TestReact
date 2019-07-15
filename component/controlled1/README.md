@@ -1,4 +1,6 @@
-DEMO controlled component using state in component, forms are CC. 
+DEMO controlled component using state in component, forms are CC beacuse every keypress is reflected
+in the state variable and this state is synchronized with the UI. Atomic operation is character keypress. 
+This ignores validation. 
 how to use onChange, how to update state in component from UI change
 add: is there onXXX which should be same as onChange? 
 

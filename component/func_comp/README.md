@@ -4,7 +4,6 @@ funcional compoents dont use this but use props
 
 1) oldindex.js shows a functional component needs to have first capital letter
 2) oldindexprops.js shows a functional component w/props. 
-3) refactor contactlist app to use functional components
-each component should be in a separate file like OO design
+3) MovieCard/Movielist functional components
 4) oldindex3.js shows how to convert a functional component to a state component
 
