@@ -5,30 +5,29 @@ import ReactDOM from "react-dom";
 //modify state using setState which takes a callback
 //state change on serverState, props change, eventhandler
 class App extends Component {
-  state = {
-    username: "test username"
-  };
-  //the solution didnt bind the function in the ctor but if you use function_name=e=>{} there
-  //is a bind done for you!! how to verify this? in the debugger
-  //arrow functions bind this w/the function in ES6
-  handleChange = e => {
-    console.log("inputbox:", document.getElementById("inputbox").value);
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: ""
+    };
+  }
+
+  handleChange(e) {
+    e.persist();
+    //console.log("inputbox:", document.getElementById("inputbox").value);
     console.log("handlechange e:", e);
-    this.setState({ username: document.getElementById("inputbox").value });
-    console.log("after setstate:", this.state.username);
-    console.log("e.target:", e.target.value);
-  };
+    this.setState({ username: e.target.value });
+  }
   render() {
     return (
       <div>
         {this.state.username}
         <input
-          id="inputbox"
+          value={this.state.username}
           type="text"
           placeholder="put stuff here"
-          //value.. cant put value here or else cant enter in data
+          onChange={this.handleChange.bind(this)}
         />
-        <button onClick={this.handleChange}>Presss here</button>
       </div>
     );
   }
