@@ -18,6 +18,9 @@ Outline:
    - use form keyword, onSubmit, state changes after each character
    - 2 components, an AddItem and Form component
    - 2 styles arrow function and non arrow function
+1) form_basic:
+     uncontrolled: uses ref to get value from DOM
+     controlled: 
 1) state_example: udacity App/Game/Score component refactor
 1) button: onClick handler
 1) contactlist: how to display state w/JSX 

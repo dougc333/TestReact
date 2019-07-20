@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+//uncontrolled form uses a ref
 class Form extends Component {
   handleSubmit = () => {
     console.log("handleSubmit:", this.name.value);
