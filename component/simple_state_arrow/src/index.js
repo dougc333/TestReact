@@ -8,21 +8,13 @@ class App extends React.Component {
   };
 
   handleChange = e => {
-    console.log("handleChange e.target.value:", e.target.value);
-    console.log("handleChange e.target.name:", e.target.name);
+    console.log("handleChange e.target.value:", e);
 
-    //this.setState(username:e.target.value);
+    this.setState({ username: e.target.value });
   };
 
-  disableButton = e => {
-    console.log("disablebutton");
-    return false;
-  };
-
-  buttonClick = e => {
-    console.log("buttonClick");
-    console.log("handleChange e.target.value:", e.target.value);
-    console.log("handleChange e.target.name:", e.target.name);
+  disableButton = () => {
+    return (this.state.username === "").toString();
   };
 
   render() {
@@ -31,13 +23,10 @@ class App extends React.Component {
         <input
           type="text"
           placeholder="enter username here:"
-          onChange={this.handleChange}
-          name="input_username"
+          onChange={this.handleChange.bind(this)}
         />
-        <button onChange={this.buttonClick} disable={this.disableButton}>
-          Submit
-        </button>
-
+        <button disable={this.disableButton()}>Submit</button>
+        <p>Echo of this.state</p>
         <p>{this.state.username}</p>
       </div>
     );
