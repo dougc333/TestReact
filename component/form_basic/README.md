@@ -1,8 +1,6 @@
 
-There are uncontrolled component forms and controlled component forms
+refs: use ref JSX attribute to return DOM value of input box
 Uncontrolled forms:
-
-Using refs: 
 
 
 Controlled forms:
