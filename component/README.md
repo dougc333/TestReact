@@ -1,11 +1,23 @@
 
+
+
 Outline:
 1) simple_state:
-   - how to bind a function to a component w/o using bind keyword. use arrow function ES6 only and above
+   There are 2 conventions, one with a constructor and one without which uses arrow functions
+   Unclear if the non arrow funciton is worse just because there is no typing
+   - state in ctor
+   - how to bind a function to a component in the ctor using bind
    - how to use input box to update state
-   = how to use setState and JSON syntax to update state variable in onChange event handler triggered off button click
+   - how to use setState and JSON syntax to update state variable in onChange event handler triggered off button click
+   - props to set default values and type checking
+1) simple_state_arrow:
+   - no ctor
+   - use arrow funtion to set state
+   - props to set default values and type checking
 1) simple_state_form:
-   - use form keyword
+   - use form keyword, onSubmit, state changes after each character
+   - 2 components, an AddItem and Form component
+   - 2 styles arrow function and non arrow function
 1) state_example: udacity App/Game/Score component refactor
 1) button: onClick handler
 1) contactlist: how to display state w/JSX 

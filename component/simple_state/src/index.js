@@ -16,6 +16,7 @@ class App extends Component {
     console.log("handlechange e:", e);
     this.setState({ username: document.getElementById("inputbox").value });
     console.log("after setstate:", this.state.username);
+    console.log("e.target:", e.target.value);
   };
   render() {
     return (
@@ -25,7 +26,7 @@ class App extends Component {
           id="inputbox"
           type="text"
           placeholder="put stuff here"
-          //value={this.state.username}
+          //value.. cant put value here or else cant enter in data
         />
         <button onClick={this.handleChange}>Presss here</button>
       </div>
