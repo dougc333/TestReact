@@ -1,0 +1,31 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Ref.js
+class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    // create a ref to store the textInput DOM element
+    this.textInput = React.createRef();
+  }
+  handleSubmit = e => {
+    e.preventDefault();
+
+    console.log(this.textInput.current.value);
+  };
+
+  render() {
+    // tell React that we want to associate the <input> ref
+    // with the `textInput` that we created in the constructor
+    return (
+      <div>
+        <form onSubmit={e => this.handleSubmit(e)}>
+          <input type="text" ref={this.textInput} />
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<CustomTextInput/>, document.getElementById('root'));
