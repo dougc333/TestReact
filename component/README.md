@@ -20,7 +20,10 @@ Outline:
    - 2 styles arrow function and non arrow function
 1) form_basic:
      uncontrolled: uses ref to get value from DOM
-     controlled: 
+     controlled: means every change in state is reflectd in component, each key press results in state change
+     ref: no arrow function store state from input box
+     ref_arrow: the ref stores the value into the state var async. the input box event handler captures
+     the value of the input box on each keybox. No need to update state using refs. 
 1) state_example: udacity App/Game/Score component refactor
 1) button: onClick handler
 1) contactlist: how to display state w/JSX 
@@ -32,9 +35,9 @@ Outline:
 1) proptypes: how to use proptypes to validate type and default value
 1) how to use props and global state: project temp/ how to equate state in one component to props in another component. state liftup in react docs
 2) controlled1: echo using onChange and input
-3) controlled2: not done
-4) ex1: not done
-5) ex2: not done
+3) controlled2: 
+4) ex1: 
+5) ex2: 
 
 
 the process for making these projects is:

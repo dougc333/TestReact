@@ -1,9 +1,23 @@
 
-refs: use ref JSX attribute to return DOM value of input box
-Uncontrolled forms:
+refs: there are different types of refs which get the value from a DOM call. 
+1) callback function ref: this is in the ref arrow directory. Returns the value of the element
+in the first arg of the callback function. 
 
 
-Controlled forms:
+
+2) string: deprecated. 
+
+
+3) forward ref: 
+Advantages of refs; they dont cause a re-render like when modifying props
+manage focus
+text selection 
+media playback
+integrate w/3rd party DOM
+imperative animations 
+
+Controlled forms: the control refers to keeping the state of the element in sync with the Component. For an Input 
+element each character is updated into state, not the final string. 
 uses prop to set state values in component from html form element or div element
 Allows you to: 
   validate on submit
