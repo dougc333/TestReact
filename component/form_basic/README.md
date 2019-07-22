@@ -2,13 +2,12 @@
 refs: there are different types of refs which get the value from a DOM call. 
 1) callback function ref: this is in the ref arrow directory. Returns the value of the element
 in the first arg of the callback function. 
-
-
-
 2) string: deprecated. 
-
-
 3) forward ref: 
+
+
+One problem with using arrow functions instead of class functions is they aren't inherited. 
+
 Advantages of refs; they dont cause a re-render like when modifying props
 manage focus
 text selection 

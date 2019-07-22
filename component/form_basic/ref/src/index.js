@@ -7,10 +7,7 @@ class App extends React.Component {
     super(props);
     this.username = "";
     this.setRef = e => {
-      console.log("setRef:%o", e);
-      console.log("before setting this.username:", this.username.value);
       this.username = e;
-      console.log("after setting this.username:", this.username.value);
     };
   }
 
