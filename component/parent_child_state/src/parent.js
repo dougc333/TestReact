@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import Child from "./child";
 
 class Parent extends React.Component {
   constructor(props) {
@@ -31,8 +31,32 @@ class Parent extends React.Component {
       ]
     };
   } //end ctor
+  //called from child, where is data?
+  handleCounter(state_from_child) {
+    console.log("parent handleCounter:", state_from_child);
+    //this.setState();
+  }
   render() {
-    return this.state.books.map(x => <p key={x.isbn}>{x.name}</p>);
+    return (
+      <div className="library">
+        <h1>How many books did you read? {this.state.reads}</h1>
+        <div className="library__books">
+          {this.state.books.map((_book, _id) => {
+            return (
+              <Child
+                handleCounter={this.handleCounter}
+                key={_id}
+                id={_book.isbn}
+                name={_book.name}
+                isbn={_book.isbn}
+                author={_book.author}
+                cover={_book.cover}
+              />
+            );
+          })}
+        </div>
+      </div>
+    );
   }
 }
 
