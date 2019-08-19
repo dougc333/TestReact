@@ -5,4 +5,5 @@ to be inside a div or some high level component/html/jsx element
 this is convenient because the result of a map or filter operation returns an array
 we can specify obj.map(something) which returns an array. 
 
-
+Adding actions, delete, add, and dynamic behavior requires adding components to the 
+static version of this list
