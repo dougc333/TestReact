@@ -1,5 +1,5 @@
 
-
+//this is the same as index10.js
 function createStore(reducer){
   //1. state
   //2. get state

@@ -1,3 +1,5 @@
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/ee05e2d9fadd80268f343517f7e7eedbe8c3afa9
+//putting it all together
 // Library Code
 function createStore (reducer) {
   // The store should have four parts

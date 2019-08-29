@@ -1,3 +1,5 @@
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/e6904b280d3e7121a8371908a176224b0448594d
+//the reducer funtion
 function todos (state = [], action) {
   if (action.type === 'ADD_TODO') {
     return state.concat([action.todo])
