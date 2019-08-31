@@ -1,8 +1,6 @@
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/14bb2cd7b0c247e9429c075cff411b1cbb08a478
-//force load app
-// we dont need to do DOM calls when using react bc it creates a vdom for us
-// usually do setState for rerender, but he uses forceUpdate instead. ANtipattern. When you 
-//call forceUpdate it will rerender all child components
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/6b61c0a6e557603c12a8ef8d6062e9d688df11eb
+//dispatching todos with react
+//
 //i dont see double screen
 //
 <!DOCTYPE html>
@@ -237,6 +235,7 @@
           name,
           complete:false,
           id:generateId()
+        
       }))
 
       }
@@ -259,27 +258,11 @@
     }
 
     class Goals extends React.Component{
-      addItem = (e) =>{
-        e.preventDefault()
-        const name = this.input.value
-        this.input.value = ''
-        this.props.store.dispatch(addGoalAction({
-          id:generateId(),
-          name,
-        }))
-      
-      }
-      
       render(){
         return(
+
           <div>
             <h6>Goals</h6>
-            <input 
-            type="text"
-            placeholder="goals here"
-            ref = {(input)=>this.input=input}
-            />
-            <button onClick={this.addItem}> add goals here</button>
             <List />
           </div>
 
@@ -289,18 +272,11 @@
 
 
     class App extends React.Component{
-      componentDidMount(){
-        const {store} = this.props
-        store.subscribe(()=>this.forceUpdate())
-
-      }
       render(){
-        const {store} = this.props
-        const {todos ,goals} = store.getState()
         return(
           <div>
-            <Todos todos = {todos} store={this.props.store}/>
-            <Goals goals = {goals} store={this.props.store} />
+            <Todos store={this.props.store}/>
+            <Goals />
           </div>
         )
       }
