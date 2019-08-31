@@ -12,6 +12,12 @@
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
+<hr />
+<div id='App'>
+</div>
+
+
+
 <div>
     <h1>Todo List</h1>
     <input id='todo' type='text' placeholder='Add Todo' />
@@ -208,6 +214,63 @@
     document.getElementById('goalBtn')
       .addEventListener('click', addGoal)     
    
+  </script>
+  <script type="text/babel">
+    function List(props){
+      return(
+        <ul>
+          <li>List</li>
+        </ul>
+      )
+    }
+
+    class Todos extends React.Component{
+      render(){
+        return(
+          <div> 
+            Todos
+            <List />
+          </div>
+        )
+      }
+    }
+
+    class Goals extends React.Component{
+      render(){
+        return(
+          <div>
+            Goals
+            <List />
+          </div>
+
+        )
+      }
+    }
+
+
+    class App extends React.Component{
+      render(){
+        return(
+          <div>
+            <Todos />
+            <Goals />
+          </div>
+        )
+      }
+    }
+    class App extends React.Component{
+      render(){
+        return(
+          <div>
+            APP is here
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(
+      <App />,
+      document.getElementById('App')
+    )
   </script>
 </body>
 </html> 
