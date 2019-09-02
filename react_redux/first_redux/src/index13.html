@@ -1,5 +1,5 @@
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/494c9a91e01472ddc87935777e84d82e046010c9
-//dispatching goals with react
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/c7d050135ca6bf5ce73a79da51b198e5a90a0cfc
+//lists with react and redux
 //
 <!DOCTYPE html>
 <html>
@@ -219,6 +219,15 @@
       return(
         <ul>
           <li>List</li>
+          {props.items.map((item)=>(
+            <li key={item.id}>
+            <span>
+              {item.name}
+            </span>
+            <button onClick={()=>props.remove(item)}>
+            X </button>
+            </li>
+          ))}
         </ul>
       )
     }
@@ -233,10 +242,13 @@
           name,
           complete:false,
           id:generateId()
-        
       }))
-
       }
+
+      removeItem = (todo)=>{
+        this.props.store.dispach(removeTodoAction(todo.id))
+      }
+
       render(){
         return(
           <div> 
@@ -249,7 +261,10 @@
             <button onClick={this.addItem}>
             add todo button  
             </button>
-            <List />
+            <List 
+            items={this.props.todos}
+            remove = {this.props.removeItem}
+            />
           </div>
         )
       }
@@ -265,6 +280,11 @@
           name
         }))
       }
+
+      removeItem = (goal)=>{
+        this.props.store.dispatch(removeGoalAction(goal.id))
+      }
+
       render(){
         return(
           <div>
@@ -277,7 +297,10 @@
             <button onClick={this.addItem}>
             add goal
             </button>
-            <List />
+            <List 
+              items = {this.props.goals}
+              remove = {this.removeItem}
+            />
           </div>
 
         )

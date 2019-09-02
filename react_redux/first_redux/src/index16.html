@@ -1,5 +1,5 @@
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/494c9a91e01472ddc87935777e84d82e046010c9
-//dispatching goals with react
+//handling initial data
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/98d9b5468262eb4ea786cb55c3d68ed9de78af09
 //
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/react@16.3.0-alpha.1/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.3.0-alpha.1/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src='https://tylermcginnis.com/goals-todos-api/index.js'></script>
 </head>
 <body>
 
@@ -16,7 +17,7 @@
 <div id='App'>
 </div>
 
-<div>
+<!-- <div>
     <h1>Todo List</h1>
     <input id='todo' type='text' placeholder='Add Todo' />
     <button id='todoBtn'>Add Todo</button>
@@ -27,7 +28,7 @@
     <input id='goal' type='text' placeholder='Add Goal' />
     <button id='goalBtn'>Add Goal</button>
     <ul id='goals'></ul>
-  </div>
+  </div> -->
   <script type='text/javascript'>
 
    function generateId () {
@@ -42,6 +43,17 @@
     const TOGGLE_TODO = 'TOGGLE_TODO'
     const ADD_GOAL = 'ADD_GOAL'
     const REMOVE_GOAL = 'REMOVE_GOAL'
+    
+    
+
+    function receiveDataAction(todos,goals){
+      return{
+        type:RECEIVE_DATA,
+        todos,
+        goals
+      }
+    }
+
     function addTodoAction (todo) {
       return {
         type: ADD_TODO,
@@ -87,6 +99,13 @@
     }
     function goals (state = [], action) {
       switch(action.type) {
+        case ADD_TODO:
+          console.log("ADD_TODO")
+        case TOGGLE_TODO:
+          return state.map((todo)=>todo.id !== action.id ?todo:
+          Object.assign({},todo,{complete: !todo.complete }))
+        case RECEIVE_DATA:
+          return action.todos
         case ADD_GOAL :
           return state.concat([action.goal])
         case REMOVE_GOAL :
@@ -132,93 +151,26 @@
       todos,
       goals,
     }),Redux.applyMiddleware(checker,logger))
-    
-    store.subscribe(() => {
-      //console.log('subscribe The new state is: ', store.getState())
-      const {goals,todos} = store.getState()
-      //this fixes teh double display
-      document.getElementById('goals').innerHTML=''
-      document.getElementById('todos').innerHTML=''
 
-
-      goals.forEach(addGoalToDOM)
-      todos.forEach(addTodoToDOM)
-    })
-
-    function addTodo(){
-      const input = document.getElementById('todo')
-      const name = input.value
-      input.value=''
-      store.dispatch(addTodoAction({
-        name,
-        complete:false,
-        id:generateId()
-      }))
-    }
-
-    function addGoal () {
-      const input = document.getElementById('goal')
-      const name = input.value
-      input.value = ''
-      store.dispatch(addGoalAction({
-        id: generateId(),
-        name,
-      }))
-    }
-
-    function createRemoveButton(onClick){
-      const removeBtn = document.createElement('button')
-      removeBtn.innerHTML='X'
-      removeBtn.addEventListener('click',onClick)
-      return removeBtn
-    }
-
-
-    function addTodoToDOM(todo){
-      const node = document.createElement('li')
-      const text = document.createTextNode(todo.name)
-      const removeBtn = createRemoveButton(()=>{
-        store.dispatch(removeTodoAction(todo.id))
-
-      })
-
-      node.appendChild(text)
-      node.appendChild(removeBtn)
-      node.style.textDecoration = todo.complete ? 'line-through' : 'none'
-      node.addEventListener('click',()=>{
-        store.dispatch(toggleTodoAction(todo.id))
-      })
-      document.getElementById('todos')
-      .appendChild(node)
-
-    }
-
-    function addGoalToDOM(goal){
-      const node = document.createElement('li')
-      const text = document.createTextNode(goal.name)
-      const removeBtn = createRemoveButton(()=>{
-        store.dispatch(removeGoalAction(goal.id))
-      })
-      node.appendChild(text)
-      node.appendChild(removeBtn)
-     
-      document.getElementById('goals')
-      .appendChild(node)
-    }
-
-    document.getElementById('todoBtn')
-      .addEventListener('click', addTodo)
-    
-    document.getElementById('goalBtn')
-      .addEventListener('click', addGoal)     
-   
   </script>
+
   <script type="text/babel">
 
     function List(props){
       return(
         <ul>
           <li>List</li>
+          {props.items.map((item)=>(
+            <li key={item.id}>
+            <span
+              onClick = {()=>props.toggle && props.toggle(item.id)}
+              style={{textDecoration : item.complete ? 'line-through' : 'none'}}>
+              {item.name}
+            </span>
+            <button onClick={()=>props.remove(item)}>
+            X </button>
+            </li>
+          ))}
         </ul>
       )
     }
@@ -233,10 +185,17 @@
           name,
           complete:false,
           id:generateId()
-        
       }))
-
       }
+
+      removeItem = (todo)=>{
+        this.props.store.dispatch(removeTodoAction(todo.id))
+      }
+
+      toggleItem = (id) =>{
+        this.props.store.dispatch(toggleTodoAction(id))
+      }
+
       render(){
         return(
           <div> 
@@ -249,7 +208,11 @@
             <button onClick={this.addItem}>
             add todo button  
             </button>
-            <List />
+            <List 
+            items={this.props.todos}
+            remove = {this.removeItem}
+            toggle = {this.toggleItem} 
+            />
           </div>
         )
       }
@@ -265,6 +228,11 @@
           name
         }))
       }
+
+      removeItem = (goal)=>{
+        this.props.store.dispatch(removeGoalAction(goal.id))
+      }
+
       render(){
         return(
           <div>
@@ -277,7 +245,10 @@
             <button onClick={this.addItem}>
             add goal
             </button>
-            <List />
+            <List
+              items = {this.props.goals}
+              remove = {this.removeItem}
+            />
           </div>
 
         )
@@ -287,9 +258,15 @@
 
     class App extends React.Component{
       componentDidMount(){
-        const {store} = this.props
+      const {store} = this.props
+      
+      Promise.all([
+        API.fetchTodos(),
+        API.fetchGoals()]).then(([todos,goals])=>{
+          store.dispatch(receiveDataAction(todos,goals))
+        })
         store.subscribe(()=>this.forceUpdate())
-      }
+    }
 
       render(){
         const {store} = this.props

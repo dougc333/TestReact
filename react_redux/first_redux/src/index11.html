@@ -1,7 +1,5 @@
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/6b61c0a6e557603c12a8ef8d6062e9d688df11eb
-//dispatching todos with react
-//
-//i dont see double screen
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/494c9a91e01472ddc87935777e84d82e046010c9
+//dispatching goals with react
 //
 <!DOCTYPE html>
 <html>
@@ -258,11 +256,27 @@
     }
 
     class Goals extends React.Component{
+      addItem =(e) =>{
+        e.preventDefault()
+        const name = this.input.value
+        this.input.value='' 
+        this.props.store.dispatch(addGoalAction({
+          id:generateId(),
+          name
+        }))
+      }
       render(){
         return(
-
           <div>
             <h6>Goals</h6>
+            <input
+            type="text"
+            placeholder="add goals"
+            ref = {(input)=>this.input = input}
+            />
+            <button onClick={this.addItem}>
+            add goal
+            </button>
             <List />
           </div>
 
@@ -275,8 +289,8 @@
       render(){
         return(
           <div>
-            <Todos store={this.props.store}/>
-            <Goals />
+            <Todos store={this.props.store} />
+            <Goals store = {this.props.store} />
           </div>
         )
       }
