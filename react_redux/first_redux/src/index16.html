@@ -17,18 +17,6 @@
 <div id='App'>
 </div>
 
-<!-- <div>
-    <h1>Todo List</h1>
-    <input id='todo' type='text' placeholder='Add Todo' />
-    <button id='todoBtn'>Add Todo</button>
-    <ul id='todos'></ul>
-  </div>
-  <div>
-    <h1>Goals</h1>
-    <input id='goal' type='text' placeholder='Add Goal' />
-    <button id='goalBtn'>Add Goal</button>
-    <ul id='goals'></ul>
-  </div> -->
   <script type='text/javascript'>
 
    function generateId () {
@@ -43,7 +31,7 @@
     const TOGGLE_TODO = 'TOGGLE_TODO'
     const ADD_GOAL = 'ADD_GOAL'
     const REMOVE_GOAL = 'REMOVE_GOAL'
-    
+    const RECEIVE_DATA='RECEIVE_DATA'
     
 
     function receiveDataAction(todos,goals){
@@ -93,6 +81,8 @@
         case TOGGLE_TODO :
           return state.map((todo) => todo.id !== action.id ? todo :
             Object.assign({}, todo, { complete: !todo.complete }))
+        case RECEIVE_DATA:
+          return action.todos
         default :
           return state
       }
@@ -105,7 +95,7 @@
           return state.map((todo)=>todo.id !== action.id ?todo:
           Object.assign({},todo,{complete: !todo.complete }))
         case RECEIVE_DATA:
-          return action.todos
+          return action.goals
         case ADD_GOAL :
           return state.concat([action.goal])
         case REMOVE_GOAL :
@@ -259,10 +249,12 @@
     class App extends React.Component{
       componentDidMount(){
       const {store} = this.props
-      
+
       Promise.all([
         API.fetchTodos(),
         API.fetchGoals()]).then(([todos,goals])=>{
+          //console.log('todos:',todos)
+          //console.log('goals:',goals)
           store.dispatch(receiveDataAction(todos,goals))
         })
         store.subscribe(()=>this.forceUpdate())
