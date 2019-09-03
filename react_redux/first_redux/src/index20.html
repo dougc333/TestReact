@@ -1,5 +1,5 @@
-//optimistically toggling todos
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/89a31404efd2482256e4ce4fbf698fee4afda100
+//persisting items
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/d4732ee5af9cf1ee87b5bd42ec46034b38de4aa3
 //
 <!DOCTYPE html>
 <html>
@@ -177,14 +177,27 @@
     class Todos extends React.Component{
       addItem=(e)=>{
         e.preventDefault()
-        const name = this.input.value
-        console.log("todo additem:",name)
-        this.input.value=''
-        this.props.store.dispatch(addTodoAction({
-          name,
-          complete:false,
-          id:generateId()
-      }))
+        //save data when added
+
+      //   const name = this.input.value
+      //   console.log("todo additem:",name)
+      //   this.input.value=''
+      //   this.props.store.dispatch(addTodoAction({
+      //     name,
+      //     complete:false,
+      //     id:generateId()
+      // }))
+
+      return API.saveTodo(this.input.value)
+        .then((todo)=>{
+          this.props.store.dispatch(addTodoAction(todo))
+          this.input.value=''
+          
+        })
+        .catch(()=>{
+          alert("error saveToDo")
+        })        
+
       }
 
     removeItem = (todo)=>{
@@ -237,12 +250,21 @@
     class Goals extends React.Component{
       addItem =(e) =>{
         e.preventDefault()
-        const name = this.input.value
-        this.input.value='' 
-        this.props.store.dispatch(addGoalAction({
-          id:generateId(),
-          name
-        }))
+        // const name = this.input.value
+        // this.input.value='' 
+        // this.props.store.dispatch(addGoalAction({
+        //   id:generateId(),
+        //   name
+        // }))
+        return API.saveGoal(this.input.value)
+        .then((goal)=>{
+          this.props.store.dispatch(addGoalAction(goal))
+          this.input.value=''
+        }).catch(()=>{
+          alert("error saveGoal")
+        })
+
+
       }
 
       removeItem = (goal)=>{

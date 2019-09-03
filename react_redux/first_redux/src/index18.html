@@ -1,5 +1,5 @@
-//
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/6bb7f0d521986a316b9aa45cac4f2fae886c4bfc
+//optimistically deleting
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/5186502ac6461c2e88ba1dbf1ec158764c84823c
 //
 <!DOCTYPE html>
 <html>
@@ -105,17 +105,18 @@
       }
     }
 
-    function loading(state = true, action){
+    function loading(state=true, action){
       switch(action.type){
         case RECEIVE_DATA:
           return false
         default:
-          return state
+          return true
       }
     }
 
+
       //next is next middleware or dispatch, this nested function syntax is currying pattern
-    function checker(store){
+      function checker(store){
       return function(next){
         return function(action){
           //have access to store,next and action
@@ -187,26 +188,9 @@
       }))
       }
 
-    removeItem = (todo)=>{
-      //first call dispatch
-      console.log("removeItem:",todo)
-      console.log("state:",store.getState())
-
-      this.props.store.dispatch(removeTodoAction(todo.id))
-
-      return API.deleteTodo(todo.id).catch(()=>{
-        this.props.store.dispatch(addTodoAction(todo.id))
-        alert('an error occurred adding back')
-      })
+      removeItem = (todo)=>{
+        this.props.store.dispatch(removeTodoAction(todo.id))
       }
-    removeItem = (goal) =>{
-      this.props.store.dispatch(removeGoalAction(goal.id))
-      return API.deleteGoal(goal.id).catch(()=>{
-        this.props.state.dispatch(addGoalAction(goal))
-        alert("error goal")
-
-      })
-    }
 
       toggleItem = (id) =>{
         this.props.store.dispatch(toggleTodoAction(id))
@@ -278,7 +262,8 @@
 
       Promise.all([
         API.fetchTodos(),
-        API.fetchGoals()]).then(([todos,goals])=>{
+        API.fetchGoals()])
+        .then(([todos,goals])=>{
           //console.log('todos:',todos)
           //console.log('goals:',goals)
           store.dispatch(receiveDataAction(todos,goals))
@@ -290,10 +275,6 @@
         const {store} = this.props
         const {todos,goals,loading} = store.getState()
         
-        if (loading === true){
-          return <h3>loading</h3>
-        }
-
         return(
           <div>
             <Todos todos={todos} store={this.props.store} />
