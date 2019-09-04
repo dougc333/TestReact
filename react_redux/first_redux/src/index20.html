@@ -1,4 +1,4 @@
-//persisting items
+//Persisting Items
 //https://github.com/udacity/reactnd-redux-todos-goals/commit/d4732ee5af9cf1ee87b5bd42ec46034b38de4aa3
 //
 <!DOCTYPE html>
@@ -105,17 +105,18 @@
       }
     }
 
-    function loading(state = true, action){
+    function loading(state=true, action){
       switch(action.type){
         case RECEIVE_DATA:
           return false
         default:
-          return state
+          return true
       }
     }
 
+
       //next is next middleware or dispatch, this nested function syntax is currying pattern
-    function checker(store){
+      function checker(store){
       return function(next){
         return function(action){
           //have access to store,next and action
@@ -173,56 +174,37 @@
         </ul>
       )
     }
-
+    //no optimistic updates w/addItem becsause you need todo 
+    //object back from API
     class Todos extends React.Component{
       addItem=(e)=>{
         e.preventDefault()
-        //save data when added
 
-      //   const name = this.input.value
-      //   console.log("todo additem:",name)
-      //   this.input.value=''
-      //   this.props.store.dispatch(addTodoAction({
-      //     name,
-      //     complete:false,
-      //     id:generateId()
-      // }))
-
-      return API.saveTodo(this.input.value)
+        return API.saveTodo(this.input.value)
         .then((todo)=>{
           this.props.store.dispatch(addTodoAction(todo))
           this.input.value=''
-          
+        }).catch(()=>
+          alert('error todo addItem')
+        )
+      }
+
+      removeItem = (todo)=>{
+        this.props.store.dispatch(removeTodoAction(todo.id))
+
+        return API.deleteTodo(todo.id).catch(()=>{
+          this.props.store.dispatch(addTodoAction(todo))
+          alert('error removeItem adding back')
         })
-        .catch(()=>{
-          alert("error saveToDo")
-        })        
-
       }
 
-    removeItem = (todo)=>{
-      //first call dispatch
-      console.log("removeItem:",todo)
-      console.log("state:",store.getState())
-
-      this.props.store.dispatch(removeTodoAction(todo.id))
-
-      return API.deleteTodo(todo.id).catch(()=>{
-        this.props.store.dispatch(addTodoAction(todo.id))
-        alert('an error occurred adding back')
-      })
-      }
-    removeItem = (goal) =>{
-      this.props.store.dispatch(removeGoalAction(goal.id))
-      return API.deleteGoal(goal.id).catch(()=>{
-        this.props.state.dispatch(addGoalAction(goal))
-        alert("error goal")
-
-      })
-    }
 
       toggleItem = (id) =>{
         this.props.store.dispatch(toggleTodoAction(id))
+        return API.saveTodoToggle(id).catch(()=>{
+          this.props.store.dispatch(toggleTodoAction(id))
+          alert('toggleItem addign back')
+        })
       }
 
       render(){
@@ -250,25 +232,22 @@
     class Goals extends React.Component{
       addItem =(e) =>{
         e.preventDefault()
-        // const name = this.input.value
-        // this.input.value='' 
-        // this.props.store.dispatch(addGoalAction({
-        //   id:generateId(),
-        //   name
-        // }))
         return API.saveGoal(this.input.value)
-        .then((goal)=>{
-          this.props.store.dispatch(addGoalAction(goal))
-          this.input.value=''
-        }).catch(()=>{
-          alert("error saveGoal")
-        })
-
-
+          .then((goal)=>{
+            this.props.store.dispatch(addGoalAction(goal))
+            this.input.value=''
+          })
+          .catch(()=>
+            alert("goal addItem error")
+          )
       }
 
       removeItem = (goal)=>{
         this.props.store.dispatch(removeGoalAction(goal.id))
+        return API.deleteGoal(goal.id).catch(()=>{
+          this.props.store.dispatch(addGoalAction(goal))
+          alert('an error goadd added back')
+        })
       }
 
       render(){
@@ -300,7 +279,8 @@
 
       Promise.all([
         API.fetchTodos(),
-        API.fetchGoals()]).then(([todos,goals])=>{
+        API.fetchGoals()])
+        .then(([todos,goals])=>{
           //console.log('todos:',todos)
           //console.log('goals:',goals)
           store.dispatch(receiveDataAction(todos,goals))
@@ -312,10 +292,6 @@
         const {store} = this.props
         const {todos,goals,loading} = store.getState()
         
-        if (loading === true){
-          return <h3>loading</h3>
-        }
-
         return(
           <div>
             <Todos todos={todos} store={this.props.store} />

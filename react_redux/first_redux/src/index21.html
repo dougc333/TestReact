@@ -1,5 +1,6 @@
-//optimistically deleting
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/5186502ac6461c2e88ba1dbf1ec158764c84823c
+//custom thunk
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/524066483d154851d417e6567e50edca9b85109b
+//movdata fetching code to action creator
 //
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
   <script src="https://unpkg.com/react-dom@16.3.0-alpha.1/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
   <script src='https://tylermcginnis.com/goals-todos-api/index.js'></script>
+  <script src="https://unpkg.com/redux-thunk@2.2.0/dist/redux-thunk.min.js"></script>
 </head>
 <body>
 
@@ -174,26 +176,20 @@
         </ul>
       )
     }
-
+    //no optimistic updates w/addItem becsause you need todo 
+    //object back from API
     class Todos extends React.Component{
       addItem=(e)=>{
         e.preventDefault()
-        const name = this.input.value
-        console.log("todo additem:",name)
-        this.input.value=''
-        this.props.store.dispatch(addTodoAction({
-          name,
-          complete:false,
-          id:generateId()
-      }))
+
+        return API.saveTodo(this.input.value)
+        .then((todo)=>{
+          this.props.store.dispatch(addTodoAction(todo))
+          this.input.value=''
+        }).catch(()=>
+          alert('error todo addItem')
+        )
       }
-
-      // removeItem = (todo)=>{
-      //   return API.deleteTodo(todo.id).then(()=>{
-      //     this.props.store.dispatch(removeTodoAction(todo.id))
-      //   })
-      // }
-
 
       removeItem = (todo)=>{
         this.props.store.dispatch(removeTodoAction(todo.id))
@@ -207,6 +203,10 @@
 
       toggleItem = (id) =>{
         this.props.store.dispatch(toggleTodoAction(id))
+        return API.saveTodoToggle(id).catch(()=>{
+          this.props.store.dispatch(toggleTodoAction(id))
+          alert('toggleItem addign back')
+        })
       }
 
       render(){
@@ -234,12 +234,14 @@
     class Goals extends React.Component{
       addItem =(e) =>{
         e.preventDefault()
-        const name = this.input.value
-        this.input.value='' 
-        this.props.store.dispatch(addGoalAction({
-          id:generateId(),
-          name
-        }))
+        return API.saveGoal(this.input.value)
+          .then((goal)=>{
+            this.props.store.dispatch(addGoalAction(goal))
+            this.input.value=''
+          })
+          .catch(()=>
+            alert("goal addItem error")
+          )
       }
 
       removeItem = (goal)=>{
