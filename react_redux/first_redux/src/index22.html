@@ -1,6 +1,6 @@
-//custom thunk
-//https://github.com/udacity/reactnd-redux-todos-goals/commit/524066483d154851d417e6567e50edca9b85109b
-//movdata fetching code to action creator
+
+//thunkify goals
+//https://github.com/udacity/reactnd-redux-todos-goals/commit/f791da39440d43bcd3f24ed37fa078ecaf72cb97
 //
 <!DOCTYPE html>
 <html>
@@ -248,25 +248,43 @@
       }
     }
 
-    class Goals extends React.Component{
-      addItem =(e) =>{
-        e.preventDefault()
-        return API.saveGoal(this.input.value)
+    function handleAddGoal(name,cb){
+        return (dispatch)=>{
+          return API.saveGoal(name)
           .then((goal)=>{
-            this.props.store.dispatch(addGoalAction(goal))
-            this.input.value=''
+            dispatch(addGoalAction(goal))
+            cb()
           })
           .catch(()=>
             alert("goal addItem error")
           )
-      }
+        }
+    }
 
-      removeItem = (goal)=>{
-        this.props.store.dispatch(removeGoalAction(goal.id))
-        return API.deleteGoal(goal.id).catch(()=>{
-          this.props.store.dispatch(addGoalAction(goal))
+    function handleDeleteGoal(goal){
+      return (dispatch) => {
+        dispatch(removeGoalAction(goal.id))
+
+        return API.deleteGoal(goal.id)
+        .catch( ()=>{
+          dispatch(addGoalAction(goal))
           alert('an error goadd added back')
         })
+      }
+    }
+
+    class Goals extends React.Component{
+
+      addItem =(e) =>{
+        e.preventDefault()
+        this.props.store.dispatch(handleAddGoal(
+            this.input.value,
+            ()=>this.input.value=''
+        ))
+      }
+      
+      removeItem = (goal)=>{
+        this.props.store.dispatch(handleDeleteGoal(goal))
       }
 
       render(){
