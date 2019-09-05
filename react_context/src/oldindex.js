@@ -2,20 +2,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-function Parent(){
+function Parent({name}){
   return(
     <div>
       <h1>parent</h1>
-      <Child />  
+      <Child name={name}/>  
     </div>
   )
 }
 
-function Child(){
+function Child({name}){
   return(
    <div>
      <h1>Child</h1>
-     <GrandChild />  
+     <GrandChild name={name}/>  
    </div>
   )
 }
@@ -33,7 +33,7 @@ class App extends React.Component{
   render(){
     const name = "Bob";
     return(
-      <Parent />
+      <Parent name={name}/>
     )
   }
 }
