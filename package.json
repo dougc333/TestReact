@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "goals-todos-api": "^1.0.0",
+    "react": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-thunk": "^1.0.0"
+  }
+}

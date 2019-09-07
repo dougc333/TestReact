@@ -62,18 +62,6 @@
         id,
       }
     }
-    function addGoalAction (goal) {
-      return {
-        type: ADD_GOAL,
-        goal,
-      }
-    }
-    function removeGoalAction (id) {
-      return {
-        type: REMOVE_GOAL,
-        id,
-      }
-    }
     //instead of returning an object return a function. Good technique. 
     function handleDeleteTodo(todo){
       return (dispatch)=>{
@@ -106,6 +94,19 @@
           dispatch(toggleTodoAction(id))
           alert('toggleItem addign back')
         })
+      }
+    }
+
+    function addGoalAction (goal) {
+      return {
+        type: ADD_GOAL,
+        goal,
+      }
+    }
+    function removeGoalAction (id) {
+      return {
+        type: REMOVE_GOAL,
+        id,
       }
     }
 
@@ -166,11 +167,6 @@
     }
     function goals (state = [], action) {
       switch(action.type) {
-        case ADD_TODO:
-          console.log("ADD_TODO")
-        case TOGGLE_TODO:
-          return state.map((todo)=>todo.id !== action.id ?todo:
-          Object.assign({},todo,{complete: !todo.complete }))
         case RECEIVE_DATA:
           return action.goals
         case ADD_GOAL :
@@ -193,7 +189,7 @@
 
 
       //next is next middleware or dispatch, this nested function syntax is currying pattern
-      function checker(store){
+      const checker=(store)=>(next)=>(action)=>{
       return function(next){
         return function(action){
           //have access to store,next and action
@@ -277,11 +273,10 @@
             const state = getState()
             const stateNeeded = mapStateToProps(state)
 
-            return()
+            return(<Component {...stateNeeded} dispatch=dispatch />)
           }
         }
       })
-
 
     }
 
