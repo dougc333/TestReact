@@ -105,17 +105,18 @@
       }
     }
 
-    function loading(state = true, action){
+    function loading(state=true, action){
       switch(action.type){
         case RECEIVE_DATA:
           return false
         default:
-          return state
+          return true
       }
     }
 
+
       //next is next middleware or dispatch, this nested function syntax is currying pattern
-    function checker(store){
+      function checker(store){
       return function(next){
         return function(action){
           //have access to store,next and action
@@ -187,29 +188,29 @@
       }))
       }
 
-    removeItem = (todo)=>{
-      //first call dispatch
-      console.log("removeItem:",todo)
-      console.log("state:",store.getState())
+      // removeItem = (todo)=>{
+      //   return API.deleteTodo(todo.id).then(()=>{
+      //     this.props.store.dispatch(removeTodoAction(todo.id))
+      //   })
+      // }
 
-      this.props.store.dispatch(removeTodoAction(todo.id))
 
-      return API.deleteTodo(todo.id).catch(()=>{
-        this.props.store.dispatch(addTodoAction(todo.id))
-        alert('an error occurred adding back')
-      })
+      removeItem = (todo)=>{
+        this.props.store.dispatch(removeTodoAction(todo.id))
+
+        return API.deleteTodo(todo.id).catch(()=>{
+          this.props.store.dispatch(addTodoAction(todo))
+          alert('error removeItem adding back')
+        })
       }
-    removeItem = (goal) =>{
-      this.props.store.dispatch(removeGoalAction(goal.id))
-      return API.deleteGoal(goal.id).catch(()=>{
-        this.props.state.dispatch(addGoalAction(goal))
-        alert("error goal")
 
-      })
-    }
 
       toggleItem = (id) =>{
         this.props.store.dispatch(toggleTodoAction(id))
+        return API.saveTodoToggle(id).catch(()=>{
+          this.props.store.dispatch(toggleTodoAction(id))
+          alert('toggleItem addign back')
+        })
       }
 
       render(){
@@ -247,6 +248,10 @@
 
       removeItem = (goal)=>{
         this.props.store.dispatch(removeGoalAction(goal.id))
+        return API.deleteGoal(goal.id).catch(()=>{
+          this.props.store.dispatch(addGoalAction(goal))
+          alert('an error goadd added back')
+        })
       }
 
       render(){
@@ -278,7 +283,8 @@
 
       Promise.all([
         API.fetchTodos(),
-        API.fetchGoals()]).then(([todos,goals])=>{
+        API.fetchGoals()])
+        .then(([todos,goals])=>{
           //console.log('todos:',todos)
           //console.log('goals:',goals)
           store.dispatch(receiveDataAction(todos,goals))
@@ -290,10 +296,6 @@
         const {store} = this.props
         const {todos,goals,loading} = store.getState()
         
-        if (loading === true){
-          return <h3>loading</h3>
-        }
-
         return(
           <div>
             <Todos todos={todos} store={this.props.store} />
