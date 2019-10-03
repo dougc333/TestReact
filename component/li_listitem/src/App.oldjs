@@ -1,0 +1,23 @@
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+
+data=[
+  {name:"Bob",email:"bob@bob.com", here:true },
+  {name:"Geo",email:"geo@bob.com", here:false},
+  {name:"Ann",email:"ann@bob.com", here:true},
+  {name:"xyz",email:"xyz@bob.com", here:true}
+  ];
+  
+
+function App() {
+  return (
+    <div className="App">
+      < ListItem data={data} />
+    
+    </div>
+  );
+}
+
+export default App;

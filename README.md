@@ -1,3 +1,19 @@
+https://twitter.com/DavidKPiano/status/1179390652905410563
+
+Todo apps are useless beyond learning syntax
+https://eugenkiss.github.io/7guis/
+drag and drop a component
+can do things w.o. DOM, use swift
+infinte scroll w/filtering and data fetching from server
+calendar/date/time/timezones (low)
+apps w streaming updates; forum, todos, data viz. realtime wo using refrsh
+or mouse click(high)
+todo app with multisession support, service worker, local caching
+
+
+
+
+
 component: 
    functional component convention, 
    form controlled component,
