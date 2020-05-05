@@ -5,7 +5,8 @@ bookmarks can be moved to the client.
 In contract next.js apps are server side and have no such requirement. the bookmark
 state is immediately available to the server. 
 
-react native apps are server side or client side? 
+2 types of routers hashtable routers and browser_routers
+
 
 
 
