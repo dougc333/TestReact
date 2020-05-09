@@ -5,10 +5,16 @@ import serializeForm from 'form-serialize'
 
 class CreateContact extends Component {
   handleSubmit = (e) => {
+    console.log("class CreateContact handleSubmit props:",this.props);
     e.preventDefault()
     const values = serializeForm(e.target, { hash: true })
-    if (this.props.onCreateContact)
+    if (this.props.onCreateContact){
+      console.log('this.props.onCreateContact true')
+      console.log("values:",values)
       this.props.onCreateContact(values)
+    }else{
+      console.log('creaeContact handleSubmit NO PROPS onCreateContact!!!!!!!')
+    }
   }
 
   render() {

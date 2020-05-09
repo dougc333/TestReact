@@ -11,12 +11,13 @@ class App extends Component {
     this.num_click = 0;
     this.handleClick = this.handleClick.bind(this);
   }
-
+  //cant use num:num++
   handleClick() {
+    console.log(this.state.num);
     this.setState((state, num_click) => ({
-      isToggleOn: !state.isToggleOn
+      isToggleOn: !state.isToggleOn,
+      num:this.state.num+1
     }));
-    this.state.num++;
   }
 
   render() {
