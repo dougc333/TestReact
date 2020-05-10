@@ -1,6 +1,6 @@
 import React from 'react';
 //import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 
 class App extends React.Component{
   constructor(props){
@@ -11,8 +11,8 @@ class App extends React.Component{
   }
   componentDidMount(){
     console.log("comp did mount");
-    fetch('http://localhost:3000/')
-    .then(data=>data.json())
+    getData('http://localhost:3000/test/info')
+    .then(d=> console.log(d))
     .catch(error=>{
       console.error("error");
     });
@@ -25,13 +25,13 @@ class App extends React.Component{
 }
 
 async function getData(url='',data={}){
-  const res = await fetch(url,{
+  const res =  fetch(url,{
     method:'GET',
     mode:'no-cors',
     credentials:'same-origin',
   });
   console.log("url:",url)
   console.log("res:",res)
-  return Response.json();
+  return res;
 }
 export default App;
