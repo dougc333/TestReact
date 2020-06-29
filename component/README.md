@@ -1,5 +1,6 @@
 
 
+This is too basic post cs142. Some important points for slides old programming styles vs. current. 
 
 Outline:
 1) simple_state:
