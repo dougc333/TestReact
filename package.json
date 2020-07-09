@@ -3,9 +3,16 @@
     "bootstrap": "^4.3.1",
     "expo-cli": "^3.21.13",
     "goals-todos-api": "^1.0.0",
+    "node": "^14.5.0",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-redux": "^7.1.1",
     "react-thunk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
+    "@babel/preset-env": "^7.10.4"
   }
 }
