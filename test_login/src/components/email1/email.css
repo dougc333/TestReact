@@ -1,5 +1,9 @@
-.button-style{
-  height:20px;
-  width:40px;
+.button-style {
+  height: 20px;
+  width: 40px;
   background-color: orange;
+}
+.container {
+  justify-content: center;
+  text-align: center;
 }
