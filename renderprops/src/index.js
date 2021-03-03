@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
+//import MouseTracker from "./MouseTracker";
+//import Mouse from "./Mouse";
+//import BetterMouse from "./BetterMouse";
+import MouseCat from "./more";
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MouseCat></MouseCat>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
