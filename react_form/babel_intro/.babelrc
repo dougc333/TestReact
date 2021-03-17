@@ -1,0 +1,12 @@
+
+{
+  "presets":[
+    [
+      "@babel/preset-env",
+      {
+       "debug":true
+      },
+      "@babel/preset-react"
+    ]
+  ]
+}
