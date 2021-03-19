@@ -23,6 +23,7 @@
     "webpack": "^5.25.1"
   },
   "scripts": {
+    "build": "weboack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
