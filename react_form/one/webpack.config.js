@@ -5,7 +5,7 @@ module.exports={
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js','.jsx']
   },
   entry:'./index.js',
   module: {
